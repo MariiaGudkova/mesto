@@ -10,17 +10,6 @@
 </head>
 
 <body class="page">
-    <div class="popup">
-        <button class="popup__close-button" type="button"><img class="popup__close-icon" src="./images/popup__close-icon.svg" alt="Кнопка закрыть"></button>
-        <form class="popup__container" id="popup__container" action="#" method="post" autocomplete="off">
-            <fieldset class="popup__fieldset">
-                <legend class="popup__title">Редактировать&nbsp;профиль</legend>
-                <input class="popup__item" type="text" id="name" placeholder="Жак-Ив Кусто">
-                <input class="popup__item" type="text" id="description" placeholder="Исследователь океана">
-                <button class="popup__save-button" type="submit">Сохранить</button>
-            </fieldset>
-        </form>
-    </div>
     <header class="header">
         <img class="header__logo" src="./images/header__logo.svg" alt="Логотип">
         <div class="header__line"></div>
@@ -85,6 +74,18 @@
             <p class="footer__info">© 2020 Mesto Russia</p>
         </footer>
     </main>
+    <div class="popup">
+        <button class="popup__close-button" type="button"><img class="popup__close-icon" src="./images/popup__close-icon.svg" alt="Кнопка закрыть"></button>
+        <form class="popup__container" name="popup__container" action="#" method="post" autocomplete="off">
+            <fieldset class="popup__fieldset">
+                <legend class="popup__title">Редактировать&nbsp;профиль</legend>
+                <input class="popup__name" type="text" name="name" placeholder="Жак-Ив Кусто">
+                <input class="popup__description" type="text" name="description" placeholder="Исследователь океана">
+                <button class="popup__save-button" type="submit">Сохранить</button>
+            </fieldset>
+        </form>
+    </div>
+    <script src="./scripts/index.js"></script>
 </body>
 
 </html>
