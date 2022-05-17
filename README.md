@@ -31,7 +31,7 @@
 &ensp;
 
 ## **Cсылкa на GitHub Pages** 👀
-<a href="https://mariiagudkova.github.io/mesto//index.html" target="_blank">mariiagudkova.github.io</a>
+<a href="https://mariiagudkova.github.io/mesto/index.html" target="_blank">mariiagudkova.github.io</a>
 
 &ensp;
 
