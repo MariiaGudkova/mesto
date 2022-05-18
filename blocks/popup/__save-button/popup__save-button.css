@@ -3,6 +3,8 @@
     height: 50px;
     padding: 0;
     background: #000000;
+    outline: none;
+    border: none;
     border-radius: 2px;
     font-family: 'Inter';
     font-style: normal;
