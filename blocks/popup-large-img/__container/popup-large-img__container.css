@@ -1,0 +1,5 @@
+.popup-large-img__container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+}
