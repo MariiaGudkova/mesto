@@ -25,81 +25,43 @@
         </section>
         <section class="elements">
             <ul class="element">
-                <!-- <li class="element__item"> 
-                    <img class="element__image" src="./images/element__image-karachaevsk.jpg" alt="Карачаевск">
-                    <div class="element__signature">
-                        <h2 class="element__title">Карачаевск</h2>
-                        <button class="element__like-button" type="button"><img class="element__like-button-image" src="./images/element__like_disabled.svg" alt="Лайк"></button>
-                    </div>
-                </li>
-                <li class="element__item">
-                    <img class="element__image" src="./images/element__image-elbrus.jpg" alt="Гора Эльбрус">
-                    <div class="element__signature">
-                        <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like-button" type="button"><img class="element__like-button-image" src="./images/element__like_disabled.svg" alt="Лайк"></button>
-                    </div>
-                </li>
-                <li class="element__item">
-                    <img class="element__image" src="./images/element__image-dombay.jpg" alt="Домбай">
-                    <div class="element__signature">
-                        <h2 class="element__title">Домбай</h2>
-                        <button class="element__like-button" type="button"><img class="element__like-button-image" src="./images/element__like_disabled.svg" alt="Лайк"></button>
-                    </div>
-                </li>
-                <li class="element__item">
-                    <img class="element__image" src="./images/element__image-elbrus.jpg" alt="Гора Эльбрус">
-                    <div class="element__signature">
-                        <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like-button" type="button"><img class="element__like-button-image" src="./images/element__like_disabled.svg" alt="Лайк"></button>
-                    </div>
-                </li>
-                <li class="element__item">
-                    <img class="element__image" src="./images/element__image-dombay.jpg" alt="Домбай">
-                    <div class="element__signature">
-                        <h2 class="element__title">Домбай</h2>
-                        <button class="element__like-button" type="button"><img class="element__like-button-image" src="./images/element__like_disabled.svg" alt="Лайк"></button>
-                    </div>
-                </li>
-                <li class="element__item">
-                    <img class="element__image" src="./images/element__image-karachaevsk.jpg" alt="Карачаево-Черкесия">
-                    <div class="element__signature">
-                        <h2 class="element__title">Карачаево-Черкесия</h2>
-                        <button class="element__like-button" type="button"><img class="element__like-button-image" src="./images/element__like_disabled.svg" alt="Лайк"></button>
-                    </div>
-                </li> -->
             </ul>
         </section>
         <footer class="footer">
             <p class="footer__info">© 2022 Mesto Russia</p>
         </footer>
     </main>
-    <div class="popup">
+    <div class="popup popup_personal-data">
         <button class="popup__close-button" type="button"><img class="popup__close-icon" src="./images/popup__close-icon.svg" alt="Кнопка закрыть"></button>
-        <form class="popup__container" name="popup__container" action="#" method="post" autocomplete="off">
-            <fieldset class="popup__fieldset">
-                <legend class="popup__title">Редактировать&nbsp;профиль</legend>
-                <input class="popup__name" type="text" name="name" placeholder="Имя">
-                <input class="popup__description" type="text" name="description" placeholder="О себе">
-                <button class="popup__save-button" type="submit">Сохранить</button>
-            </fieldset>
-        </form>
+        <div class="popup__content">
+            <h2 class="popup__title">Редактировать&nbsp;профиль</h2>
+            <form class="form form_personal-data" name="form" action="#" method="post" autocomplete="off">
+                <fieldset class="form__fieldset">
+                    <input class="form__input form__input_text_name" type="text" name="name" placeholder="Имя">
+                    <input class="form__input form__input_text_description" type="text" name="description" placeholder="О себе">
+                    <button class="form__save-button form__save-button_personal-data" type="submit">Сохранить</button>
+                </fieldset>
+            </form>
+        </div>
     </div>
-    <div class="popup-add-card">
-        <button class="popup-add-card__close-button" type="button"><img class="popup-add-card__close-icon" src="./images/popup__close-icon.svg" alt="Кнопка закрыть"></button>
-        <form class="popup-add-card__container" name="popup-add-card__container" action="#" method="post" autocomplete="off">
-            <fieldset class="popup-add-card__fieldset">
-                <legend class="popup-add-card__title">Новое место</legend>
-                <input class="popup-add-card__name" type="text" name="name" placeholder="Название">
-                <input class="popup-add-card__image" type="text" name="description" placeholder="Ссылка на картинку">
-                <button class="popup-add-card__save-button" type="submit">Создать</button>
-            </fieldset>
-        </form>
+    <div class="popup popup_add-card">
+        <button class="popup__close-button" type="button"><img class="popup__close-icon" src="./images/popup__close-icon.svg" alt="Кнопка закрыть"></button>
+        <div class="popup__content">
+            <h2 class="popup__title">Новое место</h2>
+            <form class="form form_add-card" name="form" action="#" method="post" autocomplete="off">
+                <fieldset class="form__fieldset">
+                    <input class="form__input form__input_text_name form__input_text_name-card" type="text" name="name" placeholder="Название">
+                    <input class="form__input form__input_text_image" type="text" name="description" placeholder="Ссылка на картинку">
+                    <button class="form__save-button form__save-button_add-card" type="submit">Создать</button>
+                </fieldset>
+            </form>
+        </div>
     </div>
-    <div class="popup-large-img">
-        <div class="popup-large-img__container">
-            <button class="popup-large-img__close-button" type="button"><img class="popup-large-img__close-icon" src="./images/popup__close-icon.svg" alt="Кнопка закрыть"></button>
-            <img class="popup-large-img__image" src="data:," alt="empty">
-            <p class="popup-large-img__title"></p>
+    <div class="popup popup_large-img">
+        <div class="popup__large-img-content">
+            <button class="popup__close-button popup__close-button_large-image" type="button"><img class="popup__close-icon popup__close-icon_large-image" src="./images/popup__close-icon.svg" alt="Кнопка закрыть"></button>
+            <img class="popup__large-img-image" src="data:," alt="empty">
+            <p class="popup__large-img-signature"></p>
         </div>
     </div>
     <template id="card">
@@ -107,11 +69,12 @@
                 <img class="element__image" src="data:," alt="empty">
                 <div class="element__signature">
                     <h2 class="element__title"></h2>
-                    <button class="element__like-button" type="button"><img class="element__like-button-image" src="./images/element__like_disabled.svg" alt="Лайк"></button>
+                    <button class="element__like-button" type="button"></button>
                 </div>
                 <button class="element__trash-button" type="button"><img class="element__trash-button-image" src="./images/element__trash-button-image.svg" alt="Иконка мусорки"></button>
             </li>
     </template>
+    <script src="./scripts/initial-cards.js"></script>
     <script src="./scripts/index.js"></script>
 </body>
 
