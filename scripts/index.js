@@ -128,9 +128,11 @@ function profileFormSubmitHandler(evt) {
 //Adding a new card
 function cardFormSubmitHandler(evt) {
     evt.preventDefault();
-    const name = cardNameInput.value;
-    const image = cardImageInput.value;
-    createCard(name, image);
+    const card = {
+        link: cardImageInput.value,
+        title: cardNameInput.value
+    }
+    addCard(elementList, card);
     closePopup(evt);
 }
 
