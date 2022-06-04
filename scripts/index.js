@@ -13,7 +13,6 @@ const profileSubtitleElement = document.querySelector('.profile__subtitle');
 const profileEditButton = document.querySelector('.profile__edit-button');
 const cardAddButton = document.querySelector('.profile__add-button');
 const elementList = document.querySelector('.element');
-const elementImg = elementList.querySelector('.element__image');
 const popupProfile = document.querySelector('.popup_personal-data');
 const popupAddCard = document.querySelector('.popup_add-card');
 const popupImage = document.querySelector('.popup_large-img');
@@ -21,9 +20,7 @@ const popupCloseButtons = document.querySelectorAll('.popup__close-button');
 const popupImageImg = popupImage.querySelector('.popup__large-img-image');
 const popupImageTitle = popupImage.querySelector('.popup__large-img-signature');
 const formProfile = document.querySelector('.form_personal-data');
-const formProfileSaveButton = document.querySelector('.form__save-button_personal-data');
 const formAddCard = document.querySelector('.form_add-card');
-const formAddCardSaveButton = document.querySelector('.form__save-button_add-card');
 const nameInput = document.querySelector('.form__input_text_name');
 const jobInput = document.querySelector('.form__input_text_description');
 const cardNameInput = document.querySelector('.form__input_text_name-card');
@@ -33,7 +30,7 @@ const cardTemplateLi = cardTemplate.querySelector('.' + CARD_ELEMENT);
 
 
 //Adding place cards to the page
-function createCard(title, imageSrc, imageAlt) {
+function createCardElement(title, imageSrc, imageAlt) {
     const cardElement = cardTemplateLi.cloneNode(true);
     const cardElementImage = cardElement.querySelector('.element__image');
     const cardElementTitle = cardElement.querySelector('.element__title');
@@ -48,18 +45,24 @@ function createCard(title, imageSrc, imageAlt) {
     cardElementTrashButton.addEventListener('click', deleteCard);
     cardElementImage.addEventListener('click', openPopupHandler);
 
-    addCard(cardElement);
+    return cardElement;
 }
 
-function addCard(card) {
-    elementList.prepend(card);
+function prependToContainer(container, element) {
+    container.prepend(element);
 }
 
-function addDefaultCards() {
-    cardsArr.reverse().forEach(card => createCard(card.title, card.link, card.alt));
+function addCard(container, card) {
+    const { title, link, alt } = card;
+    const cardElement = createCardElement(title, link, alt);
+    prependToContainer(container, cardElement);
 }
 
-addDefaultCards();
+function addDefaultCards(container, cards) {
+    cards.reverse().forEach(card => addCard(container, card));
+}
+
+addDefaultCards(elementList, cardsArr);
 
 
 // Popups opening and closing 
@@ -125,9 +128,11 @@ function profileFormSubmitHandler(evt) {
 //Adding a new card
 function cardFormSubmitHandler(evt) {
     evt.preventDefault();
-    const name = cardNameInput.value;
-    const image = cardImageInput.value;
-    createCard(name, image);
+    const card = {
+        link: cardImageInput.value,
+        title: cardNameInput.value
+    }
+    addCard(elementList, card);
     closePopup(evt);
 }
 
