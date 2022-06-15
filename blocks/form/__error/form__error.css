@@ -1,0 +1,18 @@
+.form__error {
+    display: none;
+    font-family: "Inter", "Arial", "Helvetica", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #ff0000;
+    margin-bottom: 13px;
+}
+
+.form__error.description-input-error {
+    margin-bottom: 31px;
+}
+
+.form__error.image-link-input-error {
+    margin-bottom: 31px;
+}

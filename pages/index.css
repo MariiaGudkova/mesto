@@ -22,7 +22,11 @@
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__input/_text_description/form__input_text_description.css);
 @import url(../blocks/form/__input/_text_image/form__input_text_image.css);
+@import url(../blocks/form/__input/_error/form__input_error.css);
 @import url(../blocks/form/__save-button/form__save-button.css);
+@import url(../blocks/form/__save-button/_disabled/form__save-button_disabled.css);
+@import url(../blocks/form/__error/form__error.css);
+@import url(../blocks/form/__error/_visible/form__error_visible.css);
 
 /* Header styles */
 
