@@ -137,7 +137,7 @@ function closePopupWithOverlay(evt) {
 function keyHandler(evt) {
     if (evt.key === "Escape" || evt.key === "Esc") {
         popupsArray.forEach((popup) => {
-            popup.classList.remove(POPUP_OPEN);
+            closePopup(popup);
         });
     }
 }
