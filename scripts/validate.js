@@ -104,6 +104,14 @@ const enableValidation = ({
         formElement.addEventListener("submit", function(evt) {
             evt.preventDefault();
         });
+        formElement.addEventListener("clearFormErrors", () => {
+            clearFormInputErrors({
+                formElement,
+                inputSelector,
+                inputErrorClass,
+                errorClass,
+            });
+        });
         const fieldsetList = Array.from(
             formElement.querySelectorAll(formSetSelector)
         );
@@ -116,6 +124,23 @@ const enableValidation = ({
                 inputErrorClass,
                 errorClass,
             });
+        });
+    });
+};
+
+const clearFormInputErrors = ({
+    formElement,
+    inputSelector,
+    inputErrorClass,
+    errorClass,
+}) => {
+    const inputs = Array.from(formElement.querySelectorAll(inputSelector));
+    inputs.forEach((inputElement) => {
+        hideInputError({
+            formElement,
+            inputElement,
+            inputErrorClass,
+            errorClass,
         });
     });
 };
