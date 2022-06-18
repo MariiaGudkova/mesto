@@ -2,3 +2,11 @@
     border-bottom: 1px solid #ff0000;
     margin-bottom: 5px;
 }
+
+.form__input_error.form__input_text_description {
+    padding-bottom: 8px;
+}
+
+.form__input_error.form__input_text_image {
+    padding-bottom: 8px;
+}
