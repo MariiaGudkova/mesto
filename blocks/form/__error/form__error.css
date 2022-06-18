@@ -4,15 +4,16 @@
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
-    line-height: 15px;
+    line-height: 12px;
     color: #ff0000;
-    margin-bottom: 13px;
+    min-height: 24px;
+    margin-bottom: 1px;
 }
 
 .form__error.description-input-error {
-    margin-bottom: 31px;
+    margin-bottom: 17px;
 }
 
 .form__error.image-link-input-error {
-    margin-bottom: 31px;
+    margin-bottom: 17px;
 }
