@@ -7,13 +7,21 @@
     line-height: 12px;
     color: #ff0000;
     min-height: 24px;
-    margin-bottom: 1px;
 }
 
 .form__error.description-input-error {
-    margin-bottom: 17px;
+    margin-bottom: 19px;
 }
 
 .form__error.image-link-input-error {
-    margin-bottom: 17px;
+    margin-bottom: 19px;
+}
+
+@media screen and (max-width: 468px) {
+    .form__error.description-input-error {
+        margin-bottom: 16px;
+    }
+    .form__error.image-link-input-error {
+        margin-bottom: 16px;
+    }
 }

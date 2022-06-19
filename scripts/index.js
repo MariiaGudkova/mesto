@@ -72,26 +72,23 @@ addDefaultCards(elementList, cardsArr);
 //Popups Handlers
 function openProfilePopup() {
     setPersonalDataPopupInitialValues();
-    const popup = popupProfile;
-    openPopup(popup);
+    openPopup(popupProfile);
 }
 
 function openAddCardPopup() {
     setCardAddPopupInitialValues();
-    const popup = popupAddCard;
-    openPopup(popup);
+    openPopup(popupAddCard);
 }
 
 function openImagePopup(title, link, alt) {
-    makeLargeImage(title, link, alt);
-    const popup = popupImage;
-    openPopup(popup);
+    initImagePreview(title, link, alt);
+    openPopup(popupImage);
 }
 
 // Popups opening and closing
 function openPopup(popup) {
     popup.classList.add(POPUP_OPEN);
-    document.addEventListener("keydown", handleEscKey);
+    document.addEventListener("keydown", handleEscKeyPress);
 }
 
 function setClosePopupHandlers() {
@@ -108,7 +105,7 @@ setClosePopupHandlers();
 
 function closePopup(popup) {
     popup.classList.remove(POPUP_OPEN);
-    document.removeEventListener("keydown", handleEscKey);
+    document.removeEventListener("keydown", handleEscKeyPress);
     const form = popup.querySelector(".form");
     if (form) {
         form.dispatchEvent(new CustomEvent("clearFormErrors", { bubbles: true }));
@@ -129,7 +126,7 @@ function closePopupWithOverlay(evt) {
     closePopup(popup);
 }
 
-function handleEscKey(evt) {
+function handleEscKeyPress(evt) {
     if (evt.key === "Escape" || evt.key === "Esc") {
         popupsArray.forEach((popup) => {
             closePopup(popup);
@@ -154,9 +151,7 @@ function handleProfileFormSubmit(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     profileNameElement.textContent = nameInput.value;
     profileSubtitleElement.textContent = jobInput.value;
-    const form = evt.target;
-    const popup = form.closest(".popup");
-    closePopup(popup);
+    closePopup(popupProfile);
 }
 
 //Adding a new card
@@ -167,14 +162,12 @@ function handleCardFormSubmit(evt) {
         title: cardNameInput.value,
     };
     addCard(elementList, card);
-    const form = evt.target;
-    const popup = form.closest(".popup");
-    closePopup(popup);
+    closePopup(popupAddCard);
     setCardAddPopupInitialValues();
 }
 
 //Increase image
-function makeLargeImage(title, link, alt) {
+function initImagePreview(title, link, alt) {
     popupImageImg.src = link;
     popupImageImg.alt = alt;
     popupImageTitle.textContent = title;

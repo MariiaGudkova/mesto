@@ -24,5 +24,6 @@
     .form__save-button {
         font-size: 14px;
         line-height: 17px;
+        height: 46px;
     }
 }
