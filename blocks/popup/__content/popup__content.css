@@ -4,7 +4,7 @@
     min-width: 282px;
     position: fixed;
     left: 50%;
-    top: 184px;
+    top: 195px;
     transform: translateX(-50%);
     background-color: #ffffff;
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
@@ -16,6 +16,7 @@
 
 @media screen and (max-width: 468px) {
     .popup__content {
+        top: 123px;
         left: 19px;
         transform: none;
         padding: 25px 22px 25px 22px;
