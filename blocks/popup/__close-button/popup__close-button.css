@@ -4,7 +4,7 @@
     cursor: pointer;
     position: fixed;
     padding: 0;
-    top: 145px;
+    top: 155px;
     left: calc(50% + 223px);
 }
 
@@ -15,5 +15,11 @@
 @media screen and (max-width: 530px) {
     .popup__close-button {
         left: calc(100% - 39px);
+    }
+}
+
+@media screen and (max-width: 468px) {
+    .popup__close-button {
+        top: 86px;
     }
 }
