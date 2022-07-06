@@ -78,12 +78,11 @@ export class FormValidator {
         });
     };
 
-    _clearFormInputErrors = () => {
-        const inputs = Array.from(this._form.querySelectorAll(this._inputSelector));
-        inputs.forEach((inputElement) => {
+    resetValidation = () => {
+        this._inputList.forEach((inputElement) => {
             this._hideInputError(inputElement);
         });
-        this._disableButton();
+        this._toggleButtonState();
     };
 
     enableValidation = () => {
@@ -91,7 +90,5 @@ export class FormValidator {
             evt.preventDefault();
         });
         this._setInputEventListeners();
-        this._form.addEventListener("clearFormErrors", this._clearFormInputErrors);
-        this._toggleButtonState();
     };
 }
