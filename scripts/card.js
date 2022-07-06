@@ -1,7 +1,7 @@
 export class Card {
     _ACTIVE_LIKE_BUTTON = "element__like-button_active";
 
-    constructor(data, templateSelector, openCardHandler) {
+    constructor(data, templateSelector, handleCardClick) {
         const { link, title, alt } = data;
         this._title = title;
         this._link = link;
@@ -14,7 +14,7 @@ export class Card {
         this._likeButton = this._element.querySelector(".element__like-button");
         this._trashButton = this._element.querySelector(".element__trash-button");
 
-        this._openCardHandler = openCardHandler;
+        this._handleCardClick = handleCardClick;
 
         this._initData();
         this._setEventListeners();
@@ -43,7 +43,7 @@ export class Card {
 
     _setEventListeners() {
         this._image.addEventListener("click", () => {
-            this._openCardHandler(this._title, this._link, this._alt);
+            this._handleCardClick(this._title, this._link, this._alt);
         });
 
         this._likeButton.addEventListener("click", () => {
