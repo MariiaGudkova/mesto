@@ -77,3 +77,9 @@ export const cardNameInput = document.querySelector(
 export const cardImageInput = document.querySelector(".form__input_text_image");
 
 export const formValidators = {};
+
+export const popups = {};
+
+export const sections = {};
+
+export const pageData = {};
