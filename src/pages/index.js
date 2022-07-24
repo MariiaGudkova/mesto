@@ -6,11 +6,14 @@ import {
   profileEditButton,
   cardAddButton,
   elementList,
-  cardNameInput,
-  cardImageInput,
   formValidators,
   profileNameInput,
   profileJobInput,
+  popups,
+  cardNameInput,
+  cardImageInput,
+  sections,
+  pageData,
 } from "../utils/constants.js";
 import { Card } from "../components/Card.js";
 import { Section } from "../components/Section.js";
@@ -21,77 +24,42 @@ import { FormValidator } from "../components/FormValidator.js";
 import { UserInfo } from "../components/UserInfo.js";
 
 //Adding place cards to the page
-const defaultCardList = new Section(
-  {
-    items: cardsArr,
-    renderer: (card) => {
-      const newCard = new Card(card, "#card", openImagePopup);
-      const cardElement = newCard.getElement();
-      defaultCardList.addItem(cardElement);
-    },
-  },
-  elementList
-);
+function createCard(card) {
+  const newCard = new Card(card, "#card", openImagePopup);
+  const cardElement = newCard.getElement();
+  return cardElement;
+}
 
-defaultCardList.renderItems();
-
-//Adding a new card
-function handleCardFormSubmit(evt) {
-  const card = {
-    link: cardImageInput.value,
-    title: cardNameInput.value,
-  };
-  const newUserCard = new Section(
+function createGallerySection(cards, container) {
+  const cardList = new Section(
     {
-      items: card,
+      items: cards,
       renderer: (card) => {
-        const newCard = new Card(card, "#card", openImagePopup);
-        const cardElement = newCard.getElement();
-        newUserCard.addItem(cardElement);
+        const cardElement = createCard(card);
+        cardList.addItem(cardElement);
       },
     },
-    elementList
+    container
   );
-
-  newUserCard.renderItems();
-  popupAddCard.close();
+  cardList.renderItems();
+  return cardList;
 }
-
-//User info
-const userData = new UserInfo(userDataConfig);
 
 //Popups
-const popupProfile = new PopupProfile(
-  ".popup_personal-data",
-  handleProfileFormSubmit
-);
+function createPopups() {
+  popups["popupProfile"] = new PopupProfile(
+    ".popup_personal-data",
+    handleProfileFormSubmit,
+    formValidators["profile-form"].resetValidation
+  );
 
-const popupAddCard = new PopupWithForm(".popup_add-card", handleCardFormSubmit);
+  popups["popupAddCard"] = new PopupWithForm(
+    ".popup_add-card",
+    handleCardFormSubmit,
+    formValidators["card-form"].resetValidation
+  );
 
-const popupImage = new PopupWithImage(".popup_large-img");
-
-// Popups opening
-function openProfilePopup() {
-  formValidators["profile-form"].resetValidation();
-  const defaultUserData = userData.getUserInfo();
-  popupProfile.setInputValues(defaultUserData);
-  popupProfile.open();
-}
-
-function openAddCardPopup() {
-  formValidators["card-form"].resetValidation();
-  popupAddCard.open();
-}
-
-function openImagePopup(title, link) {
-  popupImage.open(title, link);
-}
-
-//Filling out the profile
-function handleProfileFormSubmit(values) {
-  const name = values[profileNameInput.name];
-  const job = values[profileJobInput.name];
-  userData.setUserInfo(name, job);
+  popups["popupImage"] = new PopupWithImage(".popup_large-img");
 }
 
 //Form validation
@@ -105,10 +73,45 @@ function enableFormsValidation(config) {
   });
 }
 
+//Filling out the profile
+function handleProfileFormSubmit(values) {
+  const name = values[profileNameInput.name];
+  const job = values[profileJobInput.name];
+  pageData.userInfo.setUserInfo(name, job);
+}
+
+//Adding a new card
+function handleCardFormSubmit(values) {
+  const title = values[cardNameInput.name];
+  const link = values[cardImageInput.name];
+  const card = createCard({ title, link });
+  sections["gallery"].addItem(card);
+  popups["popupAddCard"].close();
+}
+
+// Page initialization
 function initPage() {
+  pageData.userInfo = new UserInfo(userDataConfig);
   profileEditButton.addEventListener("click", openProfilePopup);
   cardAddButton.addEventListener("click", openAddCardPopup);
   enableFormsValidation(validationConfig);
+  sections["gallery"] = createGallerySection(cardsArr, elementList);
+  createPopups();
 }
 
 initPage();
+
+// Popups opening
+function openProfilePopup() {
+  const defaultUserData = pageData.userInfo.getUserInfo();
+  popups["popupProfile"].setInputValues(defaultUserData);
+  popups["popupProfile"].open();
+}
+
+function openAddCardPopup() {
+  popups["popupAddCard"].open();
+}
+
+function openImagePopup(title, link, alt) {
+  popups["popupImage"].open(title, link, alt);
+}
