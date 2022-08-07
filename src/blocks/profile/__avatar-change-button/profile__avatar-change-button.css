@@ -1,0 +1,15 @@
+.profile__avatar-change-button {
+  position: absolute;
+  top: 45px;
+  left: 40px;
+  right: 0;
+  bottom: 0;
+  background: none;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+}
