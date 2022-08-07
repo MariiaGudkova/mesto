@@ -17,11 +17,21 @@
     </header>
     <main class="container">
       <section class="profile">
-        <img
-          class="profile__avatar"
-          src='<%=require("./images/profile__avatar.jpg")%>'
-          alt="Жак-Ив Кусто"
-        />
+        <div class="profile__avatar-container">
+          <img
+            class="profile__avatar"
+            src='<%=require("./images/profile__avatar.jpg")%>'
+            alt="Жак-Ив Кусто"
+          />
+          <button class="profile__avatar-change-button" type="button">
+            <img
+              class="profile__avatar-change-button-image"
+              src='<%=require("./images/profile__avatar_after.png")%>'
+              alt="Кнопка
+              редактирования фото"
+            />
+          </button>
+        </div>
         <div class="profile__info">
           <button class="profile__edit-button" type="button">
             <img
@@ -101,6 +111,44 @@
         </form>
       </div>
     </div>
+    <div class="popup popup_change-avatar">
+      <button class="popup__close popup__close-button" type="button">
+        <img
+          class="popup__close popup__close-icon"
+          src='<%=require("./images/popup__close-icon.svg")%>'
+          alt="Кнопка закрыть"
+        />
+      </button>
+      <div class="popup__content">
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form
+          class="form form_change-avatar"
+          name="avatar-form"
+          action="#"
+          method="post"
+          autocomplete="off"
+          novalidate
+        >
+          <fieldset class="form__fieldset">
+            <input
+              class="form__input form__input_avatar_image"
+              id="image-link-input"
+              type="url"
+              name="avatar"
+              placeholder="Ссылка на картинку"
+              required
+            />
+            <span class="form__error image-link-input-error"></span>
+            <button
+              class="form__save-button form__save-button_change-avatar"
+              type="submit"
+            >
+              Сохранить
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
     <div class="popup popup_add-card">
       <button class="popup__close popup__close-button" type="button">
         <img
@@ -150,6 +198,33 @@
         </form>
       </div>
     </div>
+    <div class="popup popup_delete-card">
+      <button class="popup__close popup__close-button" type="button">
+        <img
+          class="popup__close popup__close-icon"
+          src='<%=require("./images/popup__close-icon.svg")%>'
+          alt="Кнопка закрыть"
+        />
+      </button>
+      <div class="popup__content">
+        <h2 class="popup__title">Вы уверены?</h2>
+        <form
+          class="form form_delete-card"
+          name="delete-form"
+          action="#"
+          method="post"
+          autocomplete="off"
+          novalidate
+        >
+          <button
+            class="form__save-button form__save-button_delete-card"
+            type="submit"
+          >
+            Да
+          </button>
+        </form>
+      </div>
+    </div>
     <div class="popup popup_large-img">
       <div class="popup__large-img-content">
         <button
@@ -172,7 +247,10 @@
         <img class="element__image" src="data:," alt="empty" />
         <div class="element__signature">
           <h2 class="element__title"></h2>
-          <button class="element__like-button" type="button"></button>
+          <div class="element__like">
+            <button class="element__like-button" type="button"></button>
+            <p class="element__like-count"></p>
+          </div>
         </div>
         <button class="element__trash-button" type="button">
           <img

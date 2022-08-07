@@ -69,6 +69,12 @@ export const profileJobInput = document.querySelector(
 export const profileEditButton = document.querySelector(
   ".profile__edit-button"
 );
+export const profileAvatarChangeButton = document.querySelector(
+  ".profile__avatar-change-button"
+);
+export const profileAvatarInput = document.querySelector(
+  ".form__input_avatar_image"
+);
 export const cardAddButton = document.querySelector(".profile__add-button");
 export const elementList = document.querySelector(".element");
 export const cardNameInput = document.querySelector(
@@ -83,3 +89,12 @@ export const popups = {};
 export const sections = {};
 
 export const pageData = {};
+
+export const apiConfig = {
+  host: "https://mesto.nomoreparties.co/v1/cohort-47",
+  token: "71958807-8b11-4210-86a4-64ac3be2e55a",
+};
+
+export const userName = document.querySelector(".profile__title");
+export const userJob = document.querySelector(".profile__subtitle");
+export const userPhoto = document.querySelector(".profile__avatar");

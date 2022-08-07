@@ -7,7 +7,10 @@ export class PopupWithForm extends Popup {
     this._handleSubmitFormCallback = handleSubmitFormCallback;
     this._resetValidation = resetValidation;
     this._form = this._popup.querySelector(".form");
+    this._saveButton = this._form.querySelector(".form__save-button");
+    this._saveButtonText = this._saveButton.textContent;
     this._inputs = Array.from(this._form.querySelectorAll(".form__input"));
+    this._isLoading = false;
   }
 
   _getInputValues() {
@@ -23,16 +26,18 @@ export class PopupWithForm extends Popup {
     this._resetValidation();
   }
 
-  close() {
+  close = () => {
     super.close();
     this._form.reset();
-  }
+  };
 
   _handleSubmit = (evt) => {
     evt.preventDefault();
     const values = this._getInputValues();
-    this._handleSubmitFormCallback(values);
-    this.close();
+    this.setIsLoading(true);
+    this._handleSubmitFormCallback(values)
+      .then(() => this.setIsLoading(false))
+      .then(this.close);
   };
 
   _removeEventListeners() {
@@ -44,4 +49,17 @@ export class PopupWithForm extends Popup {
     super.setEventListeners();
     this._form.addEventListener("submit", this._handleSubmit);
   }
+
+  _changeButtonForLoading = () => {
+    if (this._isLoading === true) {
+      this._saveButton.textContent = "Сохранение...";
+    } else {
+      this._saveButton.textContent = this._saveButtonText;
+    }
+  };
+
+  setIsLoading = (isLoading) => {
+    this._isLoading = isLoading;
+    this._changeButtonForLoading();
+  };
 }
