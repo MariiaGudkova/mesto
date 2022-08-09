@@ -21,6 +21,12 @@ export class PopupWithForm extends Popup {
     return this._formValues;
   }
 
+  setInputValues(userData, firstInput, secondInput) {
+    const { name, job } = userData;
+    firstInput.value = name;
+    secondInput.value = job;
+  }
+
   open() {
     super.open();
     this._resetValidation();
@@ -35,9 +41,10 @@ export class PopupWithForm extends Popup {
     evt.preventDefault();
     const values = this._getInputValues();
     this.setIsLoading(true);
-    this._handleSubmitFormCallback(values)
-      .then(() => this.setIsLoading(false))
-      .then(this.close);
+    this._handleSubmitFormCallback(values).then(() => {
+      this.setIsLoading(false);
+      this.close();
+    });
   };
 
   _removeEventListeners() {

@@ -17,21 +17,15 @@ import {
   sections,
   pageData,
   apiConfig,
-  userName,
-  userJob,
-  userPhoto,
 } from "../utils/constants.js";
 import { Api } from "../components/Api";
 import { Card } from "../components/Card.js";
 import { Section } from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
-import { PopupProfile } from "../components/PopupProfile.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupDeleteConfirmation } from "../components/PopupDeleteConfirmation";
 import { FormValidator } from "../components/FormValidator.js";
 import { UserInfo } from "../components/UserInfo.js";
-
-let currentUserId;
 
 //Create API
 const api = new Api(apiConfig.host, apiConfig.token);
@@ -44,7 +38,7 @@ function createCard(card) {
     openImagePopup,
     openCardDeletePopup,
     handleDeleteCardApi,
-    currentUserId,
+    pageData.userInfo.userId,
     api.createLike,
     api.deleteLike
   );
@@ -69,7 +63,7 @@ function createGallerySection(cards, container) {
 
 //Popups
 function createPopups() {
-  popups["popupProfile"] = new PopupProfile(
+  popups["popupProfile"] = new PopupWithForm(
     ".popup_personal-data",
     handleProfileFormSubmit,
     formValidators["profile-form"].resetValidation
@@ -109,9 +103,14 @@ function enableFormsValidation(config) {
 //Filling out the profile
 function handleProfileFormSubmit(values) {
   const name = values[profileNameInput.name];
-  const job = values[profileJobInput.name];
-  pageData.userInfo.setUserInfo(name, job);
-  return api.createUserInfo(name, job).catch(console.log);
+  const about = values[profileJobInput.name];
+  return api
+    .createUserInfo(name, about)
+    .then(({ name, about }) => {
+      pageData.userInfo.userName = name;
+      pageData.userInfo.userJob = about;
+    })
+    .catch(console.error);
 }
 
 //Changing profile avatar
@@ -119,8 +118,8 @@ function handleProfileAvatarFormSubmit(values) {
   const avatar = values[profileAvatarInput.name];
   return api
     .createUserAvatar(avatar)
-    .then((res) => {
-      loadUserInfo(res);
+    .then(({ avatar }) => {
+      pageData.userInfo.userAvatar = avatar;
     })
     .catch(console.error);
 }
@@ -147,8 +146,14 @@ function handleDeleteCardApi(id) {
 
 // Page initialization
 function initPage() {
-  loadUserInfo().then(() => {
-    pageData.userInfo = new UserInfo(userDataConfig);
+  api.getUserInfo().then(({ name, about, avatar, _id }) => {
+    pageData.userInfo = new UserInfo({
+      ...userDataConfig,
+      userName: name,
+      userJob: about,
+      userAvatar: avatar,
+      currentUserId: _id,
+    });
     profileEditButton.addEventListener("click", openProfilePopup);
     profileAvatarChangeButton.addEventListener("click", openProfileAvatarPopup);
     cardAddButton.addEventListener("click", openAddCardPopup);
@@ -167,20 +172,14 @@ function initPage() {
 
 initPage();
 
-//Loading User Info
-function loadUserInfo() {
-  return api.getUserInfo().then(({ name, about, avatar, _id }) => {
-    userName.textContent = name;
-    userJob.textContent = about;
-    userPhoto.src = avatar;
-    currentUserId = _id;
-  });
-}
-
 // Popups opening
 function openProfilePopup() {
   const defaultUserData = pageData.userInfo.getUserInfo();
-  popups["popupProfile"].setInputValues(defaultUserData);
+  popups["popupProfile"].setInputValues(
+    defaultUserData,
+    profileNameInput,
+    profileJobInput
+  );
   popups["popupProfile"].open();
 }
 
