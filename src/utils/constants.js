@@ -56,6 +56,7 @@ export const validationConfig = {
 export const userDataConfig = {
   userNameSelector: ".profile__title",
   userJobSelector: ".profile__subtitle",
+  userAvatarSelector: ".profile__avatar",
 };
 
 export const profileNameInput = document.querySelector(
@@ -94,7 +95,3 @@ export const apiConfig = {
   host: "https://mesto.nomoreparties.co/v1/cohort-47",
   token: "71958807-8b11-4210-86a4-64ac3be2e55a",
 };
-
-export const userName = document.querySelector(".profile__title");
-export const userJob = document.querySelector(".profile__subtitle");
-export const userPhoto = document.querySelector(".profile__avatar");

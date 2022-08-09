@@ -17,7 +17,6 @@ export class PopupDeleteConfirmation extends PopupWithForm {
 
   _handleSubmit = (evt) => {
     evt.preventDefault();
-    this._handleSubmitFormCallback();
-    this.close();
+    this._handleSubmitFormCallback().then(this.close);
   };
 }

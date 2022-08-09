@@ -62,9 +62,6 @@ export class Card {
 
   _updateLikesBlock(count) {
     this._likeCount.textContent = count;
-    // const isPressed = this._likeButton.classList.contains(
-    //   this._ACTIVE_LIKE_BUTTON
-    // );
     if (this._isLiked) {
       this._likeButton.classList.add(this._ACTIVE_LIKE_BUTTON);
     } else {
