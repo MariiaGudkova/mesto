@@ -5,17 +5,18 @@ export class Section {
     this._container = container;
   }
 
-  addItem(element) {
+  addItem(card) {
+    const element = this._renderer(card);
     this._container.prepend(element);
   }
 
   renderItems() {
     if (Array.isArray(this._renderedItems)) {
       this._renderedItems.forEach((item) => {
-        this._renderer(item);
+        this.addItem(item);
       });
     } else {
-      this._renderer(this._renderedItems);
+      this.addItem(this._renderedItems);
     }
   }
 }
