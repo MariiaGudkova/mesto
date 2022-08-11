@@ -144,7 +144,6 @@ function initPage() {
     .then(([userData, cards]) => {
       pageData.userInfo = new UserInfo(userDataConfig);
       pageData.userInfo.setUserInfo(userData);
-      console.info("userinfo", pageData.userInfo);
       profileEditButton.addEventListener("click", openProfilePopup);
       profileAvatarChangeButton.addEventListener(
         "click",
