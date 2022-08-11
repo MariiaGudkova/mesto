@@ -16,7 +16,6 @@ import {
   cardImageInput,
   sections,
   pageData,
-  apiConfig,
 } from "../utils/constants.js";
 import { Api } from "../components/Api";
 import { Card } from "../components/Card.js";
@@ -28,31 +27,32 @@ import { FormValidator } from "../components/FormValidator.js";
 import { UserInfo } from "../components/UserInfo.js";
 
 //Create API
-const api = new Api(apiConfig.host, apiConfig.token);
+const api = new Api({
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-47",
+  headers: {
+    authorization: "71958807-8b11-4210-86a4-64ac3be2e55a",
+    "Content-Type": "application/json",
+  },
+});
 
-//Adding place cards to the page
-function createCard(card) {
-  const newCard = new Card(
-    card,
-    "#card",
-    openImagePopup,
-    openCardDeletePopup,
-    handleDeleteCardApi,
-    pageData.userInfo.userId,
-    api.createLike,
-    api.deleteLike
-  );
-  const cardElement = newCard.getElement();
-  return cardElement;
-}
-
+// Create gallery
 function createGallerySection(cards, container) {
   const cardList = new Section(
     {
       items: cards.reverse(),
       renderer: (card) => {
-        const cardElement = createCard(card);
-        cardList.addItem(cardElement);
+        const newCard = new Card(
+          card,
+          "#card",
+          openImagePopup,
+          openCardDeletePopup,
+          handleDeleteCardApi,
+          pageData.userInfo.getUserInfo().id,
+          api.createLike,
+          api.deleteLike
+        );
+        const cardElement = newCard.getElement();
+        return cardElement;
       },
     },
     container
@@ -106,10 +106,7 @@ function handleProfileFormSubmit(values) {
   const about = values[profileJobInput.name];
   return api
     .createUserInfo(name, about)
-    .then(({ name, about }) => {
-      pageData.userInfo.userName = name;
-      pageData.userInfo.userJob = about;
-    })
+    .then(pageData.userInfo.setUserInfo)
     .catch(console.error);
 }
 
@@ -118,9 +115,7 @@ function handleProfileAvatarFormSubmit(values) {
   const avatar = values[profileAvatarInput.name];
   return api
     .createUserAvatar(avatar)
-    .then(({ avatar }) => {
-      pageData.userInfo.userAvatar = avatar;
-    })
+    .then(pageData.userInfo.setUserInfo)
     .catch(console.error);
 }
 
@@ -132,8 +127,7 @@ async function handleCardFormSubmit(values) {
 
     const card = await api.createUserCard(title, link);
 
-    const cardElement = createCard(card);
-    sections["gallery"].addItem(cardElement);
+    sections["gallery"].addItem(card);
   } catch (err) {
     console.log(err);
   }
@@ -146,28 +140,24 @@ function handleDeleteCardApi(id) {
 
 // Page initialization
 function initPage() {
-  api.getUserInfo().then(({ name, about, avatar, _id }) => {
-    pageData.userInfo = new UserInfo({
-      ...userDataConfig,
-      userName: name,
-      userJob: about,
-      userAvatar: avatar,
-      currentUserId: _id,
+  Promise.all([api.getUserInfo(), api.getInitialCards()])
+    .then(([userData, cards]) => {
+      pageData.userInfo = new UserInfo(userDataConfig);
+      pageData.userInfo.setUserInfo(userData);
+      console.info("userinfo", pageData.userInfo);
+      profileEditButton.addEventListener("click", openProfilePopup);
+      profileAvatarChangeButton.addEventListener(
+        "click",
+        openProfileAvatarPopup
+      );
+      cardAddButton.addEventListener("click", openAddCardPopup);
+      enableFormsValidation(validationConfig);
+      sections["gallery"] = createGallerySection(cards, elementList);
+      createPopups();
+    })
+    .catch((err) => {
+      console.log(err);
     });
-    profileEditButton.addEventListener("click", openProfilePopup);
-    profileAvatarChangeButton.addEventListener("click", openProfileAvatarPopup);
-    cardAddButton.addEventListener("click", openAddCardPopup);
-    enableFormsValidation(validationConfig);
-    api
-      .getInitialCards()
-      .then((cards) => {
-        sections["gallery"] = createGallerySection(cards, elementList);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    createPopups();
-  });
 }
 
 initPage();
@@ -175,11 +165,7 @@ initPage();
 // Popups opening
 function openProfilePopup() {
   const defaultUserData = pageData.userInfo.getUserInfo();
-  popups["popupProfile"].setInputValues(
-    defaultUserData,
-    profileNameInput,
-    profileJobInput
-  );
+  popups["popupProfile"].setInputValues(defaultUserData);
   popups["popupProfile"].open();
 }
 

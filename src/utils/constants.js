@@ -90,8 +90,3 @@ export const popups = {};
 export const sections = {};
 
 export const pageData = {};
-
-export const apiConfig = {
-  host: "https://mesto.nomoreparties.co/v1/cohort-47",
-  token: "71958807-8b11-4210-86a4-64ac3be2e55a",
-};
