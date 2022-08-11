@@ -3,7 +3,6 @@ import { Popup } from "./Popup.js";
 export class PopupWithForm extends Popup {
   constructor(popupSelector, handleSubmitFormCallback, resetValidation) {
     super(popupSelector);
-    this._popup = document.querySelector(popupSelector);
     this._handleSubmitFormCallback = handleSubmitFormCallback;
     this._resetValidation = resetValidation;
     this._form = this._popup.querySelector(".form");
@@ -21,10 +20,10 @@ export class PopupWithForm extends Popup {
     return this._formValues;
   }
 
-  setInputValues(userData, firstInput, secondInput) {
-    const { name, job } = userData;
-    firstInput.value = name;
-    secondInput.value = job;
+  setInputValues(data) {
+    this._inputs.forEach((input) => {
+      input.value = data[input.name];
+    });
   }
 
   open() {
@@ -41,10 +40,14 @@ export class PopupWithForm extends Popup {
     evt.preventDefault();
     const values = this._getInputValues();
     this.setIsLoading(true);
-    this._handleSubmitFormCallback(values).then(() => {
-      this.setIsLoading(false);
-      this.close();
-    });
+    this._handleSubmitFormCallback(values)
+      .then(() => {
+        this.close();
+      })
+      .catch(console.error)
+      .finally(() => {
+        this.setIsLoading(false);
+      });
   };
 
   _removeEventListeners() {

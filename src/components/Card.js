@@ -115,7 +115,7 @@ export class Card {
     });
 
     this._likeButton.addEventListener("click", () => {
-      this._handleSelfLike(this._isLiked);
+      this._handleSelfLike();
     });
 
     if (this._isOwnedByCurrentUser) {
