@@ -17,11 +17,21 @@
     </header>
     <main class="container">
       <section class="profile">
-        <img
-          class="profile__avatar"
-          src='images/profile__avatar.fd9ebf47af80fb2dcdc3.jpg'
-          alt="Жак-Ив Кусто"
-        />
+        <div class="profile__avatar-container">
+          <img
+            class="profile__avatar"
+            src='images/profile__avatar.fd9ebf47af80fb2dcdc3.jpg'
+            alt="Жак-Ив Кусто"
+          />
+          <button class="profile__avatar-change-button" type="button">
+            <img
+              class="profile__avatar-change-button-image"
+              src='images/profile__avatar_after.93c771f5f8582261951d.png'
+              alt="Кнопка
+              редактирования фото"
+            />
+          </button>
+        </div>
         <div class="profile__info">
           <button class="profile__edit-button" type="button">
             <img
@@ -84,7 +94,7 @@
               class="form__input form__input_text_description"
               id="description-input"
               type="text"
-              name="description"
+              name="about"
               placeholder="О себе"
               required
               minlength="2"
@@ -93,6 +103,44 @@
             <span class="form__error description-input-error"></span>
             <button
               class="form__save-button form__save-button_personal-data"
+              type="submit"
+            >
+              Сохранить
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_change-avatar">
+      <button class="popup__close popup__close-button" type="button">
+        <img
+          class="popup__close popup__close-icon"
+          src='images/popup__close-icon.039f1f5203f653b4bacd.svg'
+          alt="Кнопка закрыть"
+        />
+      </button>
+      <div class="popup__content">
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form
+          class="form form_change-avatar"
+          name="avatar-form"
+          action="#"
+          method="post"
+          autocomplete="off"
+          novalidate
+        >
+          <fieldset class="form__fieldset">
+            <input
+              class="form__input form__input_avatar_image"
+              id="image-link-input"
+              type="url"
+              name="avatar"
+              placeholder="Ссылка на картинку"
+              required
+            />
+            <span class="form__error image-link-input-error"></span>
+            <button
+              class="form__save-button form__save-button_change-avatar"
               type="submit"
             >
               Сохранить
@@ -133,13 +181,13 @@
             <span class="form__error name-card-input-error"></span>
             <input
               class="form__input form__input_text_image"
-              id="image-link-input"
+              id="image-url-input"
               type="url"
               name="url"
               placeholder="Ссылка на картинку"
               required
             />
-            <span class="form__error image-link-input-error"></span>
+            <span class="form__error image-url-input-error"></span>
             <button
               class="form__save-button form__save-button_add-card"
               type="submit"
@@ -147,6 +195,33 @@
               Создать
             </button>
           </fieldset>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_delete-card">
+      <button class="popup__close popup__close-button" type="button">
+        <img
+          class="popup__close popup__close-icon"
+          src='images/popup__close-icon.039f1f5203f653b4bacd.svg'
+          alt="Кнопка закрыть"
+        />
+      </button>
+      <div class="popup__content">
+        <h2 class="popup__title">Вы уверены?</h2>
+        <form
+          class="form form_delete-card"
+          name="delete-form"
+          action="#"
+          method="post"
+          autocomplete="off"
+          novalidate
+        >
+          <button
+            class="form__save-button form__save-button_delete-card"
+            type="submit"
+          >
+            Да
+          </button>
         </form>
       </div>
     </div>
@@ -172,7 +247,10 @@
         <img class="element__image" src="data:," alt="empty" />
         <div class="element__signature">
           <h2 class="element__title"></h2>
-          <button class="element__like-button" type="button"></button>
+          <div class="element__like">
+            <button class="element__like-button" type="button"></button>
+            <p class="element__like-count"></p>
+          </div>
         </div>
         <button class="element__trash-button" type="button">
           <img
