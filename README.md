@@ -40,6 +40,6 @@ _В проекте были отработаны:_
 
 ## **Cсылкa на GitHub Pages** 👀
 
-<a href="https://mariiagudkova.github.io/mesto/index.js" target="_blank">mariiagudkova.github.io</a>
+<a href="https://mariiagudkova.github.io/mesto" target="_blank">mariiagudkova.github.io</a>
 
 <img src="https://komarev.com/ghpvc/?username=your-github-username&style=flat-square&color=brightgreen" alt=""/>
