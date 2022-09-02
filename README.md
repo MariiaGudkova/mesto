@@ -18,7 +18,7 @@ _В проекте были отработаны:_
 - Навыки работы с Webpack 🚀
 - Навыки работы с Babel :link:
 
-## **Технологии** 👽
+## **Стек** 👽
 
 <div>
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" width="40" height="40">&nbsp;
@@ -32,8 +32,14 @@ _В проекте были отработаны:_
 
 </div>
 
+## **Функционал** :milky_way:
+- Добавление и удаление карточек с фотографиями :camera:
+- Добавление и удаление лайков фотографий :sparkling_heart:
+
+
+
 ## **Cсылкa на GitHub Pages** 👀
 
-<a href="https://mariiagudkova.github.io/mesto/index.html" target="_blank">mariiagudkova.github.io</a>
+<a href="https://mariiagudkova.github.io/mesto/index.js" target="_blank">mariiagudkova.github.io</a>
 
 <img src="https://komarev.com/ghpvc/?username=your-github-username&style=flat-square&color=brightgreen" alt=""/>
