@@ -43,4 +43,4 @@ _В проекте были отработаны:_
 
 <a href="https://mariiagudkova.github.io/mesto" target="_blank">Сервис Mesto</a>
 
-<img src="https://komarev.com/ghpvc/?username=your-github-username&style=flat-square&color=brightgreen" alt=""/>
+<img src="https://komarev.com/ghpvc/?username=MariiaGudkova&style=flat-square&color=brightgreen" alt=""/>
